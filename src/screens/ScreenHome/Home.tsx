@@ -8,18 +8,18 @@ import { HomeScreenProps } from '../../utlis/interfaces';
 
 const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
   const user = useSelector((state: RootState) => state.auth.user);
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigation.navigate('Login');
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (!isAuthenticated) {
+  //     navigation.navigate('Login');
+  //   }
+  // }, [isAuthenticated]);
 
   const handleLogout = () => {
     dispatch(logout());
-    navigation.navigate('Login');
+    // navigation.navigate('Login');
   };
 
   return (

@@ -8,6 +8,7 @@ const initialState: AuthState = {
     isAuthenticated: false,
     user: null,
 };
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -32,6 +33,7 @@ const authSlice = createSlice({
             const userString = storage.getString('user');
             if (userString) {
                 const user = JSON.parse(userString);
+                state.isAuthenticated = true;
                 state.user = user;
             }
         },
