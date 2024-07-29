@@ -15,7 +15,6 @@ import Routes from './src/utlis/Routes';
 const App = () => (
 
   <Provider store={store}>
-
     <Routes />
     {/* </SafeAreaView> */}
   </Provider>

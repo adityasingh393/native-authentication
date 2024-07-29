@@ -4,18 +4,19 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { signup } from '../../redux/slice.ts/authslice';
-import { StackScreenProps } from '@react-navigation/stack';
 import { User } from './utils/interface';
 import schema from './utils/validation';
-const Signup: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+import { SignupScreenProps } from '../../utlis/interfaces';
+
+const Signup: React.FC<SignupScreenProps> = ({ navigation }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<User>({
         resolver: yupResolver(schema),
     });
     const dispatch = useDispatch();
 
     const onSubmit = (data: User) => {
-        dispatch(signup(data));
         navigation.navigate('Login');
+        dispatch(signup(data));
     };
 
     return (

@@ -3,13 +3,13 @@ import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { StackScreenProps } from '@react-navigation/stack';
 import { RootState } from '../../redux/store';
 import { loginUser } from '../../utlis/loginAuth';
 import { LoginFormData } from './utils/interface';
 import schema from './utils/validation';
+import { LoginScreenProps } from '../../utlis/interfaces';
 
-const Login: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
     const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
         resolver: yupResolver(schema),
     });

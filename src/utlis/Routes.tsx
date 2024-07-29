@@ -7,8 +7,9 @@ import { RootState } from '../redux/store';
 import Signup from '../screens/ScreenSingup/Signup';
 import Login from '../screens/ScreenLogin/Login';
 import Home from '../screens/ScreenHome/Home';
+import { AuthStackParamList } from './interfaces';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<AuthStackParamList>();
 
 const Routes = () => {
     const dispatch = useDispatch();
@@ -16,11 +17,11 @@ const Routes = () => {
 
     useEffect(() => {
         dispatch(checkAuth());
-    }, []);
+    }, [dispatch]);
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthenticated ? "Home" : "Singup"}>
+            <Stack.Navigator initialRouteName={isAuthenticated ? "Home": "Singup"}>
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={Home} />
