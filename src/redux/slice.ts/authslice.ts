@@ -14,6 +14,7 @@ const authSlice = createSlice({
     reducers: {
         signup: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
+            state.isAuthenticated = true;
             storage.set('user', JSON.stringify(action.payload));
         },
         loginSuccess: (state, action: PayloadAction<User>) => {
@@ -31,7 +32,6 @@ const authSlice = createSlice({
             const userString = storage.getString('user');
             if (userString) {
                 const user = JSON.parse(userString);
-                state.isAuthenticated = true;
                 state.user = user;
             }
         },

@@ -12,16 +12,11 @@ import { AuthStackParamList } from './interfaces';
 const Stack = createStackNavigator<AuthStackParamList>();
 
 const Routes = () => {
-    const dispatch = useDispatch();
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-
-    useEffect(() => {
-        dispatch(checkAuth());
-    }, [dispatch]);
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthenticated ? "Home": "Singup"}>
+            <Stack.Navigator initialRouteName={isAuthenticated ? "Home" : "Singup"}>
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Home" component={Home} />
