@@ -1,31 +1,39 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { logout } from '../../redux/slice.ts/authslice';
-import styles from './StyleHome';
+import { RootState, AppDispatch } from '../../redux/store';
+import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice';
 import { HomeScreenProps } from '../../utlis/interfaces';
+import Loader from './component/Loader';
+import Header from './component/Header';
+import ImageCard from './component/Card';
+import styles from './styles/StylesHome';
+import {Image,} from './utils/types';
 
-const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
+const Home: React.FC<HomeScreenProps> = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-  // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
+  const images = useSelector((state: RootState) => state.images.images);
+  const loading = useSelector((state: RootState) => state.images.loading);
+  const dispatch: AppDispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigation.navigate('Login');
-  //   }
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    dispatch(fetchImagesRequest());
+  }, [dispatch]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    // navigation.navigate('Login');
-  };
+  const renderItem = ({ item }:{item:Image}) => <ImageCard item={item} />;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello, {user?.name}</Text>
-      <Button title="Logout" onPress={handleLogout} />
+      <Header userName={user?.name} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <FlatList
+          data={images}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
     </View>
   );
 };
