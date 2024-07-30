@@ -6,7 +6,7 @@ import { RootState } from '../redux/store';
 import Signup from '../screens/ScreenSingup/Signup';
 import Login from '../screens/ScreenLogin/Login';
 import Home from '../screens/ScreenHome/Home';
-import { AuthStackParamList } from './interfaces';
+import { AuthStackParamList } from '../utlis/interfaces';
 import { checkAuth } from '../redux/slice.ts/authslice';
 
 const Stack = createStackNavigator<AuthStackParamList>();
