@@ -15,9 +15,9 @@ const Routes = () => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(checkAuth());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(checkAuth());
+    }, [dispatch]);
 
     return (
         <NavigationContainer>
