@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import styles from '../styles/stylesLoader'
+import styles from './stylesLoader'
 const Loader: React.FC = () => {
   return (
   <View style={styles.loader}>

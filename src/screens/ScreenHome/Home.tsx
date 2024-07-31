@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/store';
 import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice';
 import { HomeScreenProps } from '../../utlis/interfaces';
-import Loader from './component/Loader';
-import Header from './component/Header';
-import ImageCard from './component/Card';
-import styles from './styles/StylesHome';
+import Loader from './component/Loader/Loader';
+import Header from './component/Header/Header';
+import ImageCard from './component/Card/Card';
+import styles from './StylesHome';
 import {Image,} from './utils/types';
 
 const Home: React.FC<HomeScreenProps> = () => {

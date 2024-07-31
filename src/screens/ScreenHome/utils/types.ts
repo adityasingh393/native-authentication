@@ -5,13 +5,14 @@ export interface ImageState {
   }
 
  export interface ImageCardProps {
-    item: {
-        id:number;
-      previewURL: string;
-      tags: string;
-      views: number;
-      likes: number;
-    };
+item:{
+    id:number;
+previewURL: string;
+tags: string;
+views: number;
+likes: number;
+downloads:number;
+}
   }
   export interface Image {
     id: number;
@@ -19,6 +20,7 @@ export interface ImageState {
     tags: string;
     views: number;
     likes: number;
+    downloads:number
   }
   export interface HeaderProps {
     userName: string | undefined;
