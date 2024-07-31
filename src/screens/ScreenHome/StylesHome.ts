@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#B5CFB7',
   },
   text: {
     fontSize: 20,
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 10,
     padding: 10,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#F5EDED',
     borderRadius: 5,
   },
   image: {
