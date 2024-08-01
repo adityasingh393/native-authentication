@@ -1,7 +1,7 @@
 import React from 'react';
-import Svg, { Path, Circle, G } from 'react-native-svg';
+import Svg, { Path, Circle, G, SvgProps } from 'react-native-svg';
 
-const EyeIcon: React.FC<{ width?: number; height?: number; color?: string }> = ({
+const EyeIcon: React.FC<SvgProps> = ({
   width = 24,
   height = 24,
   color = '#000',

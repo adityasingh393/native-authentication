@@ -1,17 +1,20 @@
 import { ofType } from 'redux-observable';
-import { from, OperatorFunction } from 'rxjs';
+import { from } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import axios from 'axios';
-import { fetchImagesRequest, fetchImagesSuccess, fetchImagesFailure } from './imageSlice';
+import { fetchImagesRequest, fetchImagesSuccess, fetchImagesFailure , imageSliceTypes} from './imageSlice';
+import { Observable } from 'rxjs';
 
 const API_KEY = '45186733-b75c2904d085fd97bf23a43ab';
-const API_URL = `https://pixabay.com/api/?key=${API_KEY}&per_page=20`;
+const API_URL = `https://pixabay.com/api/?q=formula1&key=${API_KEY}&per_page=30`;
 
-export const fetchImagesEpic = (action$: { pipe: (arg0: OperatorFunction<unknown, never>, arg1: OperatorFunction<unknown, { payload: any[]; type: "images/fetchImagesSuccess"; } | { payload: string; type: "images/fetchImagesFailure"; }>) => any; }) =>
+const apiReuest = axios.get(API_URL);
+
+export const fetchImagesEpic = (action$: Observable<imageSliceTypes>) =>
   action$.pipe(
     ofType(fetchImagesRequest.type),
     mergeMap(() =>
-      from(axios.get(API_URL)).pipe(
+      from(apiReuest).pipe(
         map((response) => fetchImagesSuccess(response.data.hits)),
         catchError((error) => [fetchImagesFailure(error.message)])
       )

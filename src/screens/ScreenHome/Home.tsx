@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, ListRenderItemInfo } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/store';
 import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice';
@@ -8,19 +8,17 @@ import Loader from './component/Loader/Loader';
 import Header from './component/Header/Header';
 import ImageCard from './component/Card/Card';
 import styles from './StylesHome';
-import {Image,} from './utils/types';
+import { Image } from './utils/types';
 
 const Home: React.FC<HomeScreenProps> = () => {
+  const { images, loading } = useSelector((state: RootState) => state.images);
   const user = useSelector((state: RootState) => state.auth.user);
-  const images = useSelector((state: RootState) => state.images.images);
-  const loading = useSelector((state: RootState) => state.images.loading);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchImagesRequest());
   }, [dispatch]);
 
-  const renderItem = ({ item }:{item:Image}) => <ImageCard item={item} />;
 
   return (
     <View style={styles.container}>
@@ -30,7 +28,7 @@ const Home: React.FC<HomeScreenProps> = () => {
       ) : (
         <FlatList
           data={images}
-          renderItem={renderItem}
+          renderItem={ ({ item }: ListRenderItemInfo<Image>) => <ImageCard item={item} />}
           keyExtractor={(item) => item.id.toString()}
         />
       )}

@@ -1,17 +1,17 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
-    card: {
+    cardContainer: {
       marginBottom: 10,
       padding: 10,
       backgroundColor: '#E2DAD6',
       borderRadius: 5,
     },
-    image: {
+    cardImage: {
       width: '100%',
       height: 200,
       borderRadius: 5,
     },
-    title: {
+    cardTitle: {
       fontSize: 16,
       fontWeight: 'bold',
       marginTop: 5,

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {ImageState} from '../utils/types'
+import { Image, ImageStateArray } from '../utils/types';
 
-const initialState: ImageState = {
+const initialState: ImageStateArray = {
   images: [],
   loading: false,
-  error: null,
+  error: '',
 };
 
 const imageSlice = createSlice({
@@ -15,7 +15,7 @@ const imageSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchImagesSuccess: (state, action: PayloadAction<ImageState[]>) => {
+    fetchImagesSuccess: (state, action: PayloadAction<Image[]>) => {
       state.images = action.payload;
       state.loading = false;
     },
@@ -29,3 +29,7 @@ const imageSlice = createSlice({
 export const { fetchImagesRequest, fetchImagesSuccess, fetchImagesFailure } = imageSlice.actions;
 export default imageSlice.reducer;
 
+export type imageSliceTypes =
+  | ReturnType<typeof fetchImagesRequest>
+  | ReturnType<typeof fetchImagesSuccess>
+  | ReturnType<typeof fetchImagesFailure>;

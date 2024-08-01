@@ -7,12 +7,12 @@ import HeartIcon from '../../../../Assests/Heart';
 import DownloadIcon from '../../../../Assests/Download';
 const ImageCard: React.FC<ImageCardProps> = ({ item }) => {
   return (
-    <View style={styles.card}>
-      <Image source={{ uri: item.previewURL }} style={styles.image} />
-      <Text style={styles.title}>{item.tags}</Text>
+    <View style={styles.cardContainer}>
+      <Image source={{ uri: item.previewURL }} style={styles.cardImage} />
+      <Text style={styles.cardTitle}>{item.tags}</Text>
       <View style={styles.infoContainer}>
         <Text style={styles.infoText}><EyeIcon/> {item.views}</Text>
-        <Text> <DownloadIcon/> {item.downloads}</Text>
+        <Text> <DownloadIcon /> {item.downloads}</Text>
         <Text style={styles.infoText}><HeartIcon/> {item.likes}</Text>
       </View>
     </View>

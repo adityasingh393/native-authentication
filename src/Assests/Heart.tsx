@@ -1,7 +1,7 @@
 import React from 'react';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-const HeartIcon: React.FC<{ width?: number; height?: number; color?: string }> = ({
+const HeartIcon: React.FC<SvgProps> = ({
   width = 24,
   height = 24,
   color = '#DD2E44',

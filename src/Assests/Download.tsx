@@ -1,7 +1,7 @@
 import React from 'react';
-import Svg, { Path, Polyline } from 'react-native-svg';
+import Svg, { Path, Polyline, SvgProps } from 'react-native-svg';
 
-const DownloadIcon: React.FC<{ width?: number; height?: number; color?: string }> = ({
+const DownloadIcon: React.FC <SvgProps> = ({
   width = 24,
   height = 24,
   color = '#000',
