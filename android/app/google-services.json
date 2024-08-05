@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1098194118072",
+    "project_id": "native-authentication-93cc3",
+    "storage_bucket": "native-authentication-93cc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098194118072:android:59c417e2154a22a8d11b4d",
+        "android_client_info": {
+          "package_name": "com.authentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvHJQc4kGIvqh_suaUuPaptE_FqhPSKh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, FlatList, StyleSheet, ListRenderItemInfo } from 'react-native';
+import { View, FlatList, ListRenderItemInfo } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/store';
 import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice';
