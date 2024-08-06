@@ -6,7 +6,7 @@ import { RootState } from '../redux/store';
 import Signup from '../screens/ScreenSingup/Signup';
 import Login from '../screens/ScreenLogin/Login';
 import Home from '../screens/ScreenHome/Home';
-import { checkAuth } from '../redux/slice.ts/authslice';
+// import { checkAuth } from '../redux/slice.ts/authslice';
 import { AuthStackParamList, AppStackParamList } from '../utlis/interfaces';
 
 const AuthStack = createStackNavigator<AuthStackParamList>();
@@ -16,15 +16,15 @@ const Routes = () => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(checkAuth());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(checkAuth());
+    // }, [dispatch]);
 
     return (
         <NavigationContainer>
             {isAuthenticated ? (
                 <AppStack.Navigator initialRouteName="Home">
-                    <AppStack.Screen name="Home" component={Home} />
+                    <AppStack.Screen name="Home" component={Home} options={{headerShown:true}} />
                 </AppStack.Navigator>
             ) : (
                 <AuthStack.Navigator initialRouteName="Login">

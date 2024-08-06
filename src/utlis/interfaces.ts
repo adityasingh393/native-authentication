@@ -22,5 +22,5 @@ export type AppStackParamList = {
 };
 
 export type SignupScreenProps = StackScreenProps<AuthStackParamList, 'Signup'>;
-export type LoginScreenProps = StackScreenProps<AuthStackParamList, 'Login'>;
+export type LoginScreenProps = StackScreenProps<AuthStackParamList, 'Login' >;
 export type HomeScreenProps = StackScreenProps<AppStackParamList, 'Home'>;
