@@ -1,31 +1,37 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, FlatList, StyleSheet, ListRenderItemInfo } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { logout } from '../../redux/slice.ts/authslice';
-import styles from './StyleHome';
+import { RootState, AppDispatch } from '../../redux/store';
+import { fetchImagesRequest } from '../ScreenHome/redux/imageSlice';
 import { HomeScreenProps } from '../../utlis/interfaces';
+import Loader from './component/Loader/Loader';
+import Header from './component/Header/Header';
+import ImageCard from './component/Card/Card';
+import styles from './StylesHome';
+import { Image } from './utils/types';
 
-const Home: React.FC<HomeScreenProps> = ({ navigation }) => {
+const Home: React.FC<HomeScreenProps> = () => {
+  const { images, loading } = useSelector((state: RootState) => state.images);
   const user = useSelector((state: RootState) => state.auth.user);
-  // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigation.navigate('Login');
-  //   }
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    dispatch(fetchImagesRequest());
+  }, [dispatch]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    // navigation.navigate('Login');
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello, {user?.name}</Text>
-      <Button title="Logout" onPress={handleLogout} />
+      <Header userName={user?.name} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <FlatList
+          data={images}
+          renderItem={ ({ item }: ListRenderItemInfo<Image>) => <ImageCard item={item} />}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
     </View>
   );
 };

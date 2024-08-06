@@ -5,6 +5,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 16,
+        backgroundColor:'#B5CFB7',
     },
     title: {
         fontSize: 24,
