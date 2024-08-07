@@ -56,7 +56,7 @@ const Routes = () => {
     <NavigationContainer>
       {isAuthenticated ? (
         <AppStack.Navigator initialRouteName="Home">
-          <AppStack.Screen name="Home" component={Home} options={{ headerShown: true }} />
+          <AppStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         </AppStack.Navigator>
       ) : (
         <AuthStack.Navigator initialRouteName="Login">

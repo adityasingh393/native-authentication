@@ -7,11 +7,9 @@ import styles from './StylesHeader';
 
 const Header: React.FC<HeaderProps> = ({ userName }) => {
   const dispatch = useDispatch();
-
   const handleLogout = () => {
     logoutUser(dispatch);
   };
-
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>Hello, {userName}</Text>
