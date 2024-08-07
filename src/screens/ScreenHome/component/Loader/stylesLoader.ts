@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     borderWidth: 8,
-    borderColor: '#f3f3f3',
+    borderColor: 'blue',
     borderTopColor: '#0a0a0a',
     transform: [{ rotate: '0deg' }],
   },

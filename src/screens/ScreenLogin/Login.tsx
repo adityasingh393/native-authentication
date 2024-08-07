@@ -18,12 +18,6 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigation.navigate('Home');
-  //   }
-  // }, [isAuthenticated]);
-
   const onSubmit = (data: LoginFormData) => {
     loginUser(data.email, data.password, dispatch);
   };

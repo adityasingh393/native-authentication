@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-// import { logout } from '../../../../redux/slice.ts/authslice';
 import { logoutUser } from '../../../../utlis/firebaseAuth';
 import { HeaderProps } from '../../utils/types';
 import styles from './StylesHeader';
