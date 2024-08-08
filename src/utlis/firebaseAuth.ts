@@ -1,17 +1,15 @@
-import { AppDispatch } from '../redux/store';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setUser } from '../redux/slice.ts/authslice';
 import { User } from './interfaces';
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppDispatch } from '../redux/store';
 
 export const signupUser = async (user: User, dispatch: AppDispatch) => {
   try {
     const userCredential = await auth().createUserWithEmailAndPassword(user.email, user.password);
     const idToken = await userCredential.user.getIdToken();
-    const id=await auth().currentUser?.getIdToken();
-    console.log(id);
-    console.log("singup", idToken)
     await AsyncStorage.setItem('authToken', idToken);
     const newUser: User = {
       email: user.email,
@@ -29,7 +27,6 @@ export const loginUser = async (email: string, password: string, dispatch: AppDi
   try {
     const userCredential = await auth().signInWithEmailAndPassword(email, password);
     const idToken = await userCredential.user.getIdToken();
-    console.log("login", idToken)
     await AsyncStorage.setItem('authToken', idToken);
 
     const currentUser = auth().currentUser;
@@ -37,8 +34,8 @@ export const loginUser = async (email: string, password: string, dispatch: AppDi
       const user: User = {
         email: currentUser.email!,
         name: currentUser.displayName!,
-        phone: '', 
-        password: '', 
+        phone: '',
+        password: '',
       };
       dispatch(setUser(user));
     }
@@ -47,6 +44,32 @@ export const loginUser = async (email: string, password: string, dispatch: AppDi
     Alert.alert('Error occurred, cannot log you in. Please check your credentials and try again.');
   }
 };
+
+export const loginWithGoogle = async (dispatch: AppDispatch) => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const userInfo = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(userInfo.idToken);
+    const userCredential = await auth().signInWithCredential(googleCredential);
+    const idToken = await userCredential.user.getIdToken();
+    await AsyncStorage.setItem('authToken', idToken);
+
+    const currentUser = auth().currentUser;
+    if (currentUser) {
+      const user: User = {
+        email: currentUser.email!,
+        name: currentUser.displayName!,
+        phone: '',
+        password: '',
+      };
+      dispatch(setUser(user));
+    }
+  } catch (error) {
+    console.error("Google Sign-In Error: ", error);
+    Alert.alert('Error occurred, cannot log you in with Google. Please try again.');
+  }
+};
+
 
 export const logoutUser = async (dispatch: AppDispatch) => {
   try {

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
-import { signupUser } from '../../utlis/firebaseAuth';
+import { signupUser, loginWithGoogle } from '../../utlis/firebaseAuth';
 import { User } from '../../utlis/interfaces';
 import schema from './utils/validation';
 import { SignupScreenProps } from '../../utlis/interfaces';
 import styles from './StylesSignup';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Signup: React.FC<SignupScreenProps> = ({ navigation }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<User>({
@@ -15,8 +16,18 @@ const Signup: React.FC<SignupScreenProps> = ({ navigation }) => {
   });
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '1098194118072-asmjk2jcfr382c7vog3j9cbs9g6igkdg.apps.googleusercontent.com',
+    });
+  }, []);
+
   const onSubmit = (data: User) => {
     signupUser(data, dispatch);
+  };
+
+  const handleGoogleSignup = () => {
+    loginWithGoogle(dispatch);
   };
 
   return (
@@ -85,6 +96,7 @@ const Signup: React.FC<SignupScreenProps> = ({ navigation }) => {
 
       <Button title="Signup" onPress={handleSubmit(onSubmit)} />
       <Button title="Login" onPress={() => navigation.navigate('Login')} />
+      <Button title="Signup with Google" onPress={handleGoogleSignup} />
     </View>
   );
 };

@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import { loginUser } from '../../utlis/firebaseAuth';
+import { useDispatch } from 'react-redux';
+import { loginUser, loginWithGoogle } from '../../utlis/firebaseAuth';
 import { LoginFormData } from './utils/interface';
 import schema from './utils/validation';
 import { LoginScreenProps } from '../../utlis/interfaces';
 import styles from './StylesLogin';
-import { useEffect } from 'react';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
     resolver: yupResolver(schema),
   });
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '1098194118072-asmjk2jcfr382c7vog3j9cbs9g6igkdg.apps.googleusercontent.com',
+    });
+  }, []);
 
   const onSubmit = (data: LoginFormData) => {
     loginUser(data.email, data.password, dispatch);
+  };
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle(dispatch);
   };
 
   return (
@@ -58,6 +66,7 @@ const Login: React.FC<LoginScreenProps> = ({ navigation }) => {
 
       <Button title="Login" onPress={handleSubmit(onSubmit)} />
       <Button title="Signup" onPress={() => navigation.navigate('Signup')} />
+      <Button title="Login with Google" onPress={handleGoogleLogin} />
     </View>
   );
 };

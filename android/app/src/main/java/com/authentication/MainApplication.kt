@@ -1,4 +1,4 @@
-package com.authentication
+package com.aditya
 
 import android.app.Application
 import com.facebook.react.PackageList

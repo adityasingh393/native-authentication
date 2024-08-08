@@ -1,4 +1,4 @@
-package com.authentication
+package com.aditya
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
