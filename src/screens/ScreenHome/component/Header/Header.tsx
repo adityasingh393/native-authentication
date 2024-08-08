@@ -1,17 +1,15 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../../../redux/slice.ts/authslice';
+import { logoutUser } from '../../../../utlis/firebaseAuth';
 import { HeaderProps } from '../../utils/types';
 import styles from './StylesHeader';
 
 const Header: React.FC<HeaderProps> = ({ userName }) => {
   const dispatch = useDispatch();
-
   const handleLogout = () => {
-    dispatch(logout());
+    logoutUser(dispatch);
   };
-
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.headerText}>Hello, {userName}</Text>
